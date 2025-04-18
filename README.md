@@ -60,17 +60,17 @@ We are extending the MCP of Picsellia, so Atlas can communicate easily and inter
 
 ## Agents
 
-### Image + labels Analysis
+### Data-centric analysis workflow
 
 - **Image Quality** – blur detection,luminance and contrast outliers...
 - **Annotation Quality** – Outliers detection, missing labels, duplicates, overlapping labels...
 
-### MCP
+### Operator
 
 - **API** - Use our SDK to retrieve basic information about your dataset and images
 - **Tools** - Use tools to perform actions like tagging, dataset creation, removing images ...
 
-### Data Analysis
+### Dataset Doctor
 
 - Chat with the computed report to ask questions about your dataset and get insights
 
