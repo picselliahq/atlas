@@ -5,7 +5,7 @@
 [![uv](https://img.shields.io/badge/uv-DE5FE9?logo=uv&logoColor=white)](https://github.com/astral-sh/uv)
 [![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](https://github.com/python/cpython)
 [![FastAPI](https://img.shields.io/badge/FastAPI-009485?logo=fastapi&logoColor=white)](https://github.com/fastapi/fastapi)
-[![Code Coverage](https://img.shields.io/codecov/c/github/picselliahq/atlas/development.svg?token=9N0MS8EO0T&label=Coverage&logo=codecov&logoColor=white&labelColor=F01F7A)](https://codecov.io/gh/picselliahq/atlas)
+[![Code Coverage](https://img.shields.io/codecov/c/github/picselliahq/atlas/main.svg?label=Coverage&logo=codecov&logoColor=white&labelColor=F01F7A)](https://codecov.io/gh/picselliahq/atlas)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 > **Atlas** is an open‑source collection of AI agents built with
