@@ -5,10 +5,11 @@
 [![uv](https://img.shields.io/badge/uv-DE5FE9?logo=uv&logoColor=white)](https://github.com/astral-sh/uv)
 [![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)](https://github.com/python/cpython)
 [![FastAPI](https://img.shields.io/badge/FastAPI-009485?logo=fastapi&logoColor=white)](https://github.com/fastapi/fastapi)
-[![Code Coverage](https://img.shields.io/codecov/c/github/picselliahq/picsellia-agents/development.svg?token=9N0MS8EO0T&label=Coverage&logo=codecov&logoColor=white&labelColor=F01F7A)](https://codecov.io/gh/picselliahq/picsellia-agents)
+[![Code Coverage](https://img.shields.io/codecov/c/github/picselliahq/atlas/development.svg?token=9N0MS8EO0T&label=Coverage&logo=codecov&logoColor=white&labelColor=F01F7A)](https://codecov.io/gh/picselliahq/atlas)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
-> **Atlas** is an open‑source collection of AI agents built with *
-*[SmolAgents](https://github.com/huggingface/smolagents)**
+> **Atlas** is an open‑source collection of AI agents built with
+**[SmolAgents](https://github.com/huggingface/smolagents)**
 > and **[Pydantic‑AI](https://github.com/pydantic/pydantic-ai)** that super‑charges your workflows with
 _agentic_ data‑analysis super‑powers. Think of Atlas as your autonomous data‑science teammate that can read your
 > datasets, run analytical recipes, and surface insights through natural‑language conversations.
@@ -121,7 +122,7 @@ Contribution guidelines will be released with the standalone version of Atlas so
 
 ### Community Standards
 
-By participating you agree to abide by our [Code of Conduct](CODE_OF_CONDUCT.md).
+By participating you agree to abide by our [Code of Conduct](.github/CODE_OF_CONDUCT.md).
 
 ---
 
@@ -141,7 +142,7 @@ Distributed under the **Apache License 2.0**. See [`LICENSE`](LICENSE) for detai
 
 ## 💬 Support & Community
 
-- GitHub[Discussions](https://github.com/picsellia/atlas/discussions)
+- GitHub [Discussions](https://github.com/picsellia/atlas/discussions)
 - Join our **#atlas** channel in the [Picsellia Slack](https://picsellia.com/community)
 - Follow [@picsellia](https://www.linkedin.com/company/picsell-ia) on Linkedin for updates
 
