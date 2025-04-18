@@ -26,7 +26,7 @@ As a reminder, the original product is an **end-to-end platform** ranging featur
 model monitoring and feedback-loop.
 
 As our platform already empowers our users by augmenting their assets (data, annotations, experiments) by giving them a
-schema that we support and maintain, we felt that ** the newest LLM capabilities could make sense of all this
+schema that we support and maintain, we felt that **the newest LLM capabilities could make sense of all this
 now-structured data**.
 
 ### We built Atlas with this in mind, using the latest Agentic and LLM capabilities to use our data and models as a knowledge base to answer questions, run analysis and surface insights.
@@ -140,7 +140,7 @@ Distributed under the **Apache License 2.0**. See [`LICENSE`](LICENSE) for detai
 
 ## 💬 Support & Community
 
-- GitHub [Discussions](https://github.com/picsellia/atlas/discussions)
+- GitHub [Discussions](https://github.com/picselliahq/atlas/discussions)
 - Join our **#atlas** channel in the [Picsellia Slack](https://picsellia.com/community)
 - Follow [@picsellia](https://www.linkedin.com/company/picsell-ia) on Linkedin for updates
 
