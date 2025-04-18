@@ -40,9 +40,7 @@ but we plan on making it available so it will be able to:
 - **Orchestrate and analyze new experiments**
 - **Monitor your predictions and monitoring metrics to detect drifts and anomalies and allow you to react timely**
 
-On top of that, as Picsellia comes with a full-fledged Python SDK, **we are adding MCP capabilities to Atlas**, so it
-can easily communicate and interact with every Picsellia objects!
-This is done through our very own chat interface, directly in the product.
+We are extending the MCP of Picsellia, so Atlas can communicate easily and interact with every Picsellia objects! This is done through our very own chat interface, directly in the product.
 
 
 
