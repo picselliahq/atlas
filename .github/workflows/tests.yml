@@ -1,0 +1,36 @@
+name: tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_call:
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: astral-sh/setup-uv@v5
+      with:
+        version: "latest"
+        enable-cache: true
+        cache-dependency-glob: "uv.lock"
+
+    - name: Install the project
+      run: uv sync --all-extras --dev
+
+    - name: Run tests with coverage
+      run: |
+        uv run coverage run -m pytest -s
+        uv run coverage report
+        uv run coverage xml
+      env:
+        API_TOKEN: "API_TOKEN"
+        PICSELLIA_SDK_CUSTOM_LOGGING: true
+
+    - uses: codecov/codecov-action@v4
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}

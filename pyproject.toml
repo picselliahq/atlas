@@ -1,0 +1,67 @@
+[project]
+name = "picsellia-agents"
+version = "0.1.0"
+description = "Picsellia Agents Microservice"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "uvicorn[standard]>=0.34.0,<1",
+    "fastapi>=0.115.12,<1",
+    "celery>=5.5.0,<6",
+    "redis>=5.2.1,<6",
+    "picsellia>=6.21.5,<7",
+    "pydantic-settings>=2.8.1,<3",
+    "pydantic-ai>=0.0.55,<0.1",
+    "smolagents>=1.13.0,<2",
+    "litellm>=1.65.5,<2",
+    "transformers>=4.51.1,<5",
+    "torch>=2.6.0,<3",
+    "ultralytics>=8.3.106,<9",
+    "opencv-python>=4.11.0.86,<5",
+    "pandas>=2.2.3,<3",
+    "scikit-learn>=1.6.1,<2",
+    "umap-learn>=0.5.7,<1",
+    "shapely>=2.1.0,<3",
+    "matplotlib>=3.10.1,<4",
+    "seaborn>=0.13.2,<1",
+    "sentry-sdk>=2.26.1",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "coverage>=7.6.12,<8",
+    "pre-commit>=4.1.0,<5",
+    "pytest>=8.3.5,<9",
+    "testcontainers>=4.10.0,<5",
+]
+
+[tool.ruff]
+src = ["app"]
+
+[tool.ruff.lint]
+select = [
+    "E", # pycodestyle errors
+    "W", # pycodestyle warnings
+    "F", # pyflakes
+    "I", # isort
+    "C", # flake8-comprehensions
+    "B", # flake8-bugbear
+    "UP", # pyupgrade
+]
+ignore = [
+    "E501", # line too long, handled by black
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["app"]
+testpaths = ["tests"]
+filterwarnings = [
+    "ignore:.*BeartypeCallHintPepParamException.*:DeprecationWarning",
+    "ignore:.*Support for class-based `config` is deprecated.*:DeprecationWarning",
+    "ignore:.*open_text is deprecated.*:DeprecationWarning",
+    "ignore:.*There is no current event loop.*:DeprecationWarning",
+]
+
+[tool.coverage.report]
+include = ["app/*", "tests/*"]
+omit = []

@@ -1,0 +1,89 @@
+name: agents
+
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "127.0.0.1:6382:6379"
+    volumes:
+      - redis-data:/data
+
+  fastapi:
+    build: .
+    command:
+      - "uvicorn"
+      - "--factory"
+      - "config.fastapi:create_app"
+      - "--host=0.0.0.0"
+      - "--port=8008"
+      - "--log-level=debug"
+      - "--access-log"
+      - "--reload"
+    ports:
+      - "127.0.0.1:8008:8008"
+    env_file:
+      - ./app/config/.env
+    volumes:
+      - ./app:/usr/local/src/app
+    networks:
+      default:
+      picsellia-stack:
+        aliases:
+          - fastapi.agents
+    depends_on:
+      - redis
+
+  celery_chat:
+    build: .
+    command:
+      - "celery"
+      - "--app=config.celery"
+      - "worker"
+      - "--loglevel=INFO"
+      - "--concurrency=2"
+      - "--queues=chat,celery"
+    env_file:
+      - ./app/config/.env
+    volumes:
+      - ./app:/usr/local/src/app
+    networks:
+      default:
+      picsellia-stack:
+    depends_on:
+      - fastapi
+
+  celery_compute:
+    build: .
+    command:
+      - "celery"
+      - "--app=config.celery"
+      - "worker"
+      - "--loglevel=INFO"
+      - "--concurrency=2"
+      - "--queues=compute,celery"
+    env_file:
+      - ./app/config/.env
+    volumes:
+      - ./app:/usr/local/src/app
+      - huggingface-cache:/usr/local/src/.cache/huggingface
+    networks:
+      default:
+      picsellia-stack:
+    depends_on:
+      - fastapi
+
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "127.0.0.1:11434:11434"
+    volumes:
+      - ~/.ollama:/root/.ollama
+    restart: unless-stopped
+
+volumes:
+  huggingface-cache:
+  redis-data:
+
+networks:
+  picsellia-stack:
+    external: true
