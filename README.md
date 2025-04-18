@@ -40,9 +40,7 @@ but we plan on making it available so it will be able to:
 - **Orchestrate and analyze new experiments**
 - **Monitor your predictions and monitoring metrics to detect drifts and anomalies and allow you to react timely**
 
-On top of that, as Picsellia comes with a full-fledged Python SDK, **we are adding MCP capabilities to Atlas**, so it
-can easily communicate and interact with every Picsellia objects!
-This is done through our very own chat interface, directly in the product.
+We are extending the MCP of Picsellia, so Atlas can communicate easily and interact with every Picsellia objects! This is done through our very own chat interface, directly in the product.
 
 
 
@@ -62,17 +60,17 @@ This is done through our very own chat interface, directly in the product.
 
 ## Agents
 
-### Image + labels Analysis
+### Data-centric analysis workflow
 
 - **Image Quality** – blur detection,luminance and contrast outliers...
 - **Annotation Quality** – Outliers detection, missing labels, duplicates, overlapping labels...
 
-### MCP
+### Operator
 
 - **API** - Use our SDK to retrieve basic information about your dataset and images
 - **Tools** - Use tools to perform actions like tagging, dataset creation, removing images ...
 
-### Data Analysis
+### Dataset Doctor
 
 - Chat with the computed report to ask questions about your dataset and get insights
 
