@@ -1,4 +1,5 @@
 import os
+from typing import Literal
 
 from pydantic import AmqpDsn, BaseModel, RedisDsn
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -12,7 +13,9 @@ class LLMConfig(BaseModel):
 
 class Settings(BaseSettings):
     api_key: str | None = None
-    celery_broker_url: RedisDsn | AmqpDsn = RedisDsn(url="redis://redis:6379/0")
+    celery_broker_url: RedisDsn | AmqpDsn | Literal["memory://localhost/"] = RedisDsn(
+        url="redis://redis:6379/0"
+    )
     redis_url: RedisDsn = RedisDsn(url="redis://redis:6379/0")
     sentry_dsn: str | None = None
 

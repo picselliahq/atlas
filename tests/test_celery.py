@@ -3,7 +3,7 @@ from celery import Celery
 
 
 def test_celery_configuration(celery_app: Celery) -> None:
-    assert celery_app.conf.broker_url == "redis://redis:6379/0"
+    assert celery_app.conf.broker_url == "memory://localhost/"
     assert celery_app.conf.task_always_eager is True
     assert celery_app.conf.task_eager_propagates is True
     assert all(

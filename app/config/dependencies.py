@@ -38,5 +38,5 @@ async def lifespan(_: FastAPI, settings: Settings) -> AsyncGenerator[Mapping[str
     matplotlib.use("agg")
     yield {
         "settings": settings,
-        "celery_app": config.celery.create_app(settings=settings),
+        "celery_app": config.celery.app,
     }
