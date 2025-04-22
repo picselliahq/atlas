@@ -27,9 +27,6 @@ jobs:
         uv run coverage run -m pytest -s
         uv run coverage report
         uv run coverage xml
-      env:
-        API_TOKEN: "API_TOKEN"
-        PICSELLIA_SDK_CUSTOM_LOGGING: true
 
     - uses: codecov/codecov-action@v4
       env:

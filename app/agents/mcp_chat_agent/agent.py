@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import yaml
 from smolagents import PromptTemplates, ToolCallingAgent
 
@@ -10,8 +12,10 @@ from services.context import ContextService
 
 
 def create_mcp_agent(context_service: ContextService):
-    with open("agents/mcp_chat_agent/system_prompt/tool_calling_prompt.yaml") as f:
+    yaml_path = Path(__file__).parent / "system_prompt" / "tool_calling_prompt.yaml"
+    with open(yaml_path) as f:
         tool_calling_prompt = yaml.safe_load(f)
+
     tool_calling_prompt = PromptTemplates(**tool_calling_prompt)
     get_dataset_info_tool = GetMetadatasetInformation(context=context_service)
     final_answer = FinalAnswerTool()

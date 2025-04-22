@@ -1,3 +1,6 @@
+from pathlib import Path
+
+
 class PromptGenerator:
     def __init__(
         self,
@@ -15,7 +18,8 @@ class PromptGenerator:
         prompt = """"""
 
         if self.context:
-            with open("agents/prompts/templates/analysis_context.md") as file:
+            md_path = Path(__file__).parent / "templates" / "analysis_context.md"
+            with open(md_path) as file:
                 prompt += file.read()
 
         if self.analysis:
@@ -29,7 +33,8 @@ In order to identify:
             prompt += analysis_goal
 
         if self.format:
-            with open("agents/prompts/templates/formatting_guidelines.md") as file:
+            md_path = Path(__file__).parent / "templates" / "formatting_guidelines.md"
+            with open(md_path) as file:
                 prompt += file.read()
 
         prompt += f"""

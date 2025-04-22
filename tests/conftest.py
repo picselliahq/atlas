@@ -1,6 +1,9 @@
 from collections.abc import Generator
 from pathlib import Path
+from unittest import mock
 
+import httpx
+import picsellia
 import pytest
 from celery import Celery
 from fastapi import FastAPI
@@ -27,6 +30,7 @@ def settings() -> Generator[Settings, None, None]:
 
         yield Settings(
             api_key="TEST_TOKEN",
+            celery_broker_url="memory://localhost/",
             report_model=LLMConfig(base_url=ollama.get_endpoint() + "/v1"),
             chat_model=LLMConfig(
                 name="ollama_chat/llama3.2",
@@ -82,3 +86,61 @@ def chat_model(settings: Settings) -> LiteLLMModel:
         api_key=settings.chat_model.api_key,
         temperature=1,
     )
+
+
+@pytest.fixture(scope="function", autouse=True)
+def mock_redis_client() -> Generator[mock.Mock, None, None]:
+    with mock.patch("services.context.cache") as mock_redis_client:
+        mock_redis_client.get.return_value = None
+        mock_redis_client.set.return_value = None
+        yield mock_redis_client
+
+
+@pytest.fixture(scope="function", autouse=True)
+def mock_picsellia_client() -> Generator[mock.Mock, None, None]:
+    with mock.patch("services.context.get_client") as mock_picsellia_client:
+        mock_client = mock.Mock(spec=picsellia.Client)
+
+        mock_connexion = mock.Mock()
+        mock_connexion.generate_report_object_name.return_value = "mocked_report_name"
+        mock_client.connexion = mock_connexion
+
+        mock_dataset_version = mock.Mock(spec=picsellia.DatasetVersion)
+        mock_dataset_version.list_embeddings.return_value = []
+        mock_dataset_version.list_annotations.return_value = []
+        mock_client.get_dataset_version_by_id.return_value = mock_dataset_version
+
+        mock_picsellia_client.return_value = mock_client
+        yield mock_client
+
+
+@pytest.fixture(scope="function", autouse=True)
+def mock_load_assets() -> Generator[mock.Mock, None, None]:
+    with mock.patch(
+        "agents.common.metadata.image_metadata_processor.load_assets"
+    ) as mock_load_assets:
+        mock_instance = mock.Mock()
+        mock_load_assets.return_value = []
+        yield mock_instance
+
+
+@pytest.fixture(scope="function", autouse=True)
+def mock_file_service() -> Generator[mock.Mock, None, None]:
+    with mock.patch("services.context.FileService") as mock_file_service:
+        mock_instance = mock.Mock()
+        mock_file_service.return_value = mock_instance
+        mock_instance.upload.return_value = None
+        mock_instance.download.return_value = None
+
+        yield mock_instance
+
+
+@pytest.fixture(scope="function", autouse=True)
+def mock_callback_platform() -> Generator[mock.Mock, None, None]:
+    with mock.patch("services.context.callback_platform") as mock_client:
+        mock_response = mock.Mock(spec=httpx.Response)
+        mock_response.status_code = 200
+        mock_response.raise_for_status.return_value = None
+
+        mock_client.return_value = mock_response
+        yield mock_client

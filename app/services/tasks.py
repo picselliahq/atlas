@@ -1,4 +1,5 @@
 import logging
+from pathlib import Path
 
 import pandas as pd
 import yaml
@@ -25,8 +26,11 @@ def report_agent(context_service: ContextService, message: str):
     context_service.add_message_to_chat_session(human_message)
     dataset_report_tool = GetDatasetAnalysisReport(context=context_service)
     create_new_dataset_version = CreateNewDatasetVersion(context=context_service)
-    with open("agents/report_chat_agent/system_prompt/tool_calling_prompt.yaml") as f:
+
+    yaml_path = Path(__file__).parent / "system_prompt" / "tool_calling_prompt.yaml"
+    with open(yaml_path) as f:
         tool_calling_prompt = yaml.safe_load(f)
+
     tool_calling_prompt = PromptTemplates(**tool_calling_prompt)
 
     agent = ToolCallingAgent(
