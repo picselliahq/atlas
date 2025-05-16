@@ -1,4 +1,31 @@
+import os
+
 import picsellia
+from PIL import Image
+
+from services.data_extraction.image_embeddings import CLIPImageEmbedder
+from services.embedders import clip_image_embedder
+
+
+class LocalImageMetadata:
+    def __init__(self, file_path: str, image_id: int):
+        self.image_id = image_id
+        self.target_path = file_path
+        self.filename = os.path.basename(file_path)
+        self.image = Image.open(file_path)
+        self.width = self.image.width
+        self.height = self.image.height
+        self.clip_embeddings = clip_image_embedder.compute_embeddings(self.image)
+
+    def dict(self):
+        """Return a dictionary representation of the metadata."""
+        return {
+            "filename": self.filename,
+            "target_path": self.target_path,
+            "width": self.width,
+            "height": self.height,
+            "clip_embeddings": self.clip_embeddings,
+        }
 
 
 class AssetMetadata:
