@@ -1,6 +1,6 @@
-from PIL import Image
 import numpy as np
-from typing import Union, List, Tuple
+from PIL import Image
+
 from services.data_extraction.image_embeddings import CLIPImageEmbedder
 
 
@@ -16,8 +16,8 @@ class CLIPShapeEmbedder:
 
     @staticmethod
     def _get_bounding_box(
-            shape: List[Tuple[float, float]], is_polygon: bool
-    ) -> Tuple[int, int, int, int]:
+        shape: list[tuple[float, float]], is_polygon: bool
+    ) -> tuple[int, int, int, int]:
         """
         Helper function to compute bounding box coordinates for a shape.
 
@@ -44,13 +44,10 @@ class CLIPShapeEmbedder:
         return int(left), int(top), int(right), int(bottom)
 
     def extract_shape_embedding(
-            self,
-            image: Image.Image,
-            shapes: Union[
-                List[Tuple[float, float]],  # Single rectangle: [(x1,y1), (x2,y2)]
-                List[List[Tuple[float, float]]],  # Multiple rectangles or single polygon
-            ],
-            is_polygon: bool = True,
+        self,
+        image: Image.Image,
+        shapes: list[tuple[float, float]] | list[list[tuple[float, float]]],
+        is_polygon: bool = True,
     ) -> np.ndarray:
         """
         Extract CLIP embeddings for one or more shapes in an image.
@@ -68,12 +65,12 @@ class CLIPShapeEmbedder:
         """
         # Convert single shape to list
         if not isinstance(shapes[0], list):
-            shapes = [shapes]
+            shapes = [shapes]  # type: ignore[assignment]
 
         cropped_images = []
 
         for shape in shapes:
-            left, top, right, bottom = self._get_bounding_box(shape, is_polygon)
+            left, top, right, bottom = self._get_bounding_box(shape, is_polygon)  # type: ignore[arg-type]
 
             # Ensure coordinates are within image bounds
             left = max(0, left)
@@ -89,12 +86,9 @@ class CLIPShapeEmbedder:
         return self.embedder.compute_embeddings(cropped_images)
 
     def extract_rectangle_embedding(
-            self,
-            image: Image.Image,
-            rectangles: Union[
-                List[Tuple[float, float]],  # Single rectangle: [(x1,y1), (x2,y2)]
-                List[List[Tuple[float, float]]],  # Multiple rectangles
-            ],
+        self,
+        image: Image.Image,
+        rectangles: list[tuple[float, float]] | list[list[tuple[float, float]]],
     ) -> np.ndarray:
         """
         Convenience function to extract embeddings for rectangles.
@@ -102,12 +96,9 @@ class CLIPShapeEmbedder:
         return self.extract_shape_embedding(image, rectangles, is_polygon=False)
 
     def extract_polygon_embedding(
-            self,
-            image: Image.Image,
-            polygons: Union[
-                List[Tuple[float, float]],  # Single polygon: [(x1,y1), (x2,y2), ...]
-                List[List[Tuple[float, float]]],  # Multiple polygons
-            ],
+        self,
+        image: Image.Image,
+        polygons: list[tuple[float, float]] | list[list[tuple[float, float]]],
     ) -> np.ndarray:
         """
         Convenience function to extract embeddings for polygons.

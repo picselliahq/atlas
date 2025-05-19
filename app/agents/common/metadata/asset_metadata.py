@@ -3,7 +3,6 @@ import os
 import picsellia
 from PIL import Image
 
-from services.data_extraction.image_embeddings import CLIPImageEmbedder
 from services.embedders import clip_image_embedder
 
 

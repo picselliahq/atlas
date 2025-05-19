@@ -13,7 +13,7 @@ def compute_analysis():
 
     if coco_file_path:
         annotation_data = []
-        with open(coco_file_path, "r") as coco_file:
+        with open(coco_file_path) as coco_file:
             coco_data = json.load(coco_file)
         images = coco_data["images"]
         annotations = coco_data["annotations"]
@@ -26,7 +26,10 @@ def compute_analysis():
                 file_path=os.path.join(dataset_folder_path, image["file_name"]),
                 image_id=image["id"],
             )
-            image_map[image["id"]] = {"image_metadata": image_metadata, "annotations": []}
+            image_map[image["id"]] = {
+                "image_metadata": image_metadata,
+                "annotations": [],
+            }
             image_data.append(image_metadata.dict())
         image_df = pd.DataFrame(image_data)
         for annotation in annotations:
@@ -40,7 +43,7 @@ def compute_analysis():
                 "label": labelmap[annotation["category_id"]],
                 "image_width": images[annotation["image_id"]]["width"],
                 "image_height": images[annotation["image_id"]]["height"],
-                "filename": images[annotation["image_id"]]["file_name"]
+                "filename": images[annotation["image_id"]]["file_name"],
             }
             image_map[annotation["image_id"]]["annotations"].append(coco_item)
             image = image_map[annotation["image_id"]]["image_metadata"].image
@@ -55,8 +58,7 @@ def compute_analysis():
     else:
         filename_list = os.listdir(dataset_folder_path)
         image_paths = [
-            os.path.join(dataset_folder_path, filename)
-            for filename in filename_list
+            os.path.join(dataset_folder_path, filename) for filename in filename_list
         ]
         image_data = []
         for i, image_path in enumerate(image_paths):

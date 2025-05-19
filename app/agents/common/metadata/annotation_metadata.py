@@ -22,7 +22,9 @@ class LocalAnnotationMetadata:
         self.h_norm = self.h / self.image_height
         x2 = self.x + self.w
         y2 = self.y + self.h
-        self.shape_embeddings = clip_shape_embedder.extract_rectangle_embedding(image, [(self.x, self.y), (x2, y2)])
+        self.shape_embeddings = clip_shape_embedder.extract_rectangle_embedding(
+            image, [(self.x, self.y), (x2, y2)]
+        )
 
     def dict(self):
         """Return a dictionary representation of the metadata."""

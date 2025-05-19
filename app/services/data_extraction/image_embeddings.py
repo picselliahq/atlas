@@ -1,8 +1,7 @@
+import numpy as np
 import torch
 from PIL import Image
-from transformers import CLIPProcessor, CLIPModel
-from typing import Union, List
-import numpy as np
+from transformers import CLIPModel, CLIPProcessor
 
 
 class CLIPImageEmbedder:
@@ -21,7 +20,7 @@ class CLIPImageEmbedder:
             self.model = self.model.cuda()
 
     def compute_embeddings(
-            self, image: Union[Image.Image, List[Image.Image]], normalize: bool = True
+        self, image: Image.Image | list[Image.Image], normalize: bool = True
     ) -> np.ndarray:
         """
         Compute CLIP embeddings for one or multiple images.
