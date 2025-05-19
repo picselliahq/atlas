@@ -7,10 +7,13 @@ from agents.common.metadata.annotation_metadata import LocalAnnotationMetadata
 from agents.common.metadata.asset_metadata import LocalImageMetadata
 
 
-def compute_analysis():
-    dataset_folder_path = ""
-    coco_file_path = ""
+def compute_analysis(dataset_folder_path: str, coco_file_path: str | None = None):
+    """Compute analysis on a dataset with optional COCO annotations.
 
+    Args:
+        dataset_folder_path: Path to the dataset directory
+        coco_file_path: Optional path to COCO annotations file
+    """
     if coco_file_path:
         annotation_data = []
         with open(coco_file_path) as coco_file:
@@ -69,6 +72,3 @@ def compute_analysis():
             image_data.append(image_metadata)
         image_df = pd.DataFrame(image_data)
         image_df.to_csv("image_df.csv", index=False)
-
-
-compute_analysis()

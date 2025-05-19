@@ -1,9 +1,23 @@
 [project]
-name = "atlas"
+name = "atlas-vision"
 version = "0.1.0"
-description = "Picsellia Agents Microservice"
+description = "A powerful dataset analysis and management tool for computer vision"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
+authors = [
+    {name = "Picsellia", email = "contact@picsellia.com"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Image Recognition",
+]
 dependencies = [
     "uvicorn[standard]>=0.34.0,<1",
     "fastapi>=0.115.12,<1",
@@ -25,7 +39,15 @@ dependencies = [
     "matplotlib>=3.10.1,<4",
     "seaborn>=0.13.2,<1",
     "sentry-sdk>=2.26.1",
+    "click>=8.1.7,<9",
 ]
+
+[project.scripts]
+atlas-vision = "app.cli:atlas"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.uv]
 dev-dependencies = [
@@ -33,6 +55,8 @@ dev-dependencies = [
     "pre-commit>=4.1.0,<5",
     "pytest>=8.3.5,<9",
     "testcontainers>=4.10.0,<5",
+    "build>=1.1.1,<2",
+    "twine>=5.0.0,<6",
 ]
 
 [tool.ruff]
