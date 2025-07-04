@@ -26,4 +26,4 @@ RUN --mount=type=cache,target=$HOME_DIRECTORY/.cache/uv,uid=1000 \
     uv sync --frozen --no-dev
 
 # Copy application code
-COPY --chown=user app/ $HOME_DIRECTORY/app/
+COPY --chown=user src/ $HOME_DIRECTORY/app/

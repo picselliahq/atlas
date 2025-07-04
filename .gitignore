@@ -373,7 +373,7 @@ $RECYCLE.BIN/
 *.lnk
 
 cloud-storage-clients
-app/tmp
+src/tmp
 
 
 # Python-generated files
@@ -385,8 +385,8 @@ app/tmp
 *.DS_Store
 FastSAM-s.pt
 FastSAM-x.pt
-app/sam2.1_b.pt
+src/sam2.1_b.pt
 
-app/config/.env
-app/charts/*
-app/results/*
+src/atlas_vision/config/.env
+src/charts/*
+src/results/*

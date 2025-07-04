@@ -2,9 +2,11 @@ from collections.abc import Generator
 from pathlib import Path
 from unittest import mock
 
+import atlas_vision.config.celery
 import httpx
 import picsellia
 import pytest
+from atlas_vision.config.settings import LLMConfig, Settings
 from celery import Celery
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
@@ -13,9 +15,7 @@ from pydantic_ai.providers.openai import OpenAIProvider
 from smolagents import LiteLLMModel
 from testcontainers.ollama import OllamaContainer
 
-import config.celery
 import config.fastapi
-from config.settings import LLMConfig, Settings
 
 
 @pytest.fixture(scope="session")
@@ -47,7 +47,7 @@ def fastapi_app(settings: Settings) -> Generator[FastAPI, None, None]:
 
 @pytest.fixture(scope="session", autouse=True)
 def celery_app(settings: Settings) -> Generator[Celery, None, None]:
-    app = config.celery.create_app(settings=settings)
+    app = atlas_vision.config.celery.create_app(settings=settings)
     app.conf.task_always_eager = True
     app.conf.task_eager_propagates = True
     yield app

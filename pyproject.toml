@@ -1,13 +1,11 @@
 [project]
-name = "atlas-vision"
+name = "atlas-vision"                       # ← stays dashed (PyPI / pip install)
 version = "0.1.0"
 description = "A powerful dataset analysis and management tool for computer vision"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
-authors = [
-    {name = "Picsellia", email = "contact@picsellia.com"}
-]
-license = {text = "MIT"}
+authors = [{ name = "Picsellia", email = "contact@picsellia.com" }]
+license = { text = "MIT" }
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -42,42 +40,40 @@ dependencies = [
     "click>=8.1.7,<9",
 ]
 
+# ──────────────────────────
+# CLI entry-point ⤵
+# users type  `atlas-vision …`  →  python calls  atlas_vision.cli:main()
+# ──────────────────────────
 [project.scripts]
-atlas-vision = "app.cli:atlas"
+atlas-vision = "atlas_vision.cli:atlas"
 
+# ──────────────────────────
+# Build system (Hatchling)
+# ──────────────────────────
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling>=1.25"]
 build-backend = "hatchling.build"
 
-[tool.uv]
-dev-dependencies = [
-    "coverage>=7.6.12,<8",
-    "pre-commit>=4.1.0,<5",
-    "pytest>=8.3.5,<9",
-    "testcontainers>=4.10.0,<5",
-    "build>=1.1.1,<2",
-    "twine>=5.0.0,<6",
+# Tell Hatchling where the real package lives (src layout)
+[tool.hatch.build.targets.wheel]
+packages = ["src/atlas_vision"]
+include = [
+    "src/atlas_vision/**/*.py",
+    "src/atlas_vision/**/*.json",
+    "src/atlas_vision/**/*.yaml",
+    "src/atlas_vision/**/*.yml",
 ]
 
+# Ruff still needs to know the source root inside src/
 [tool.ruff]
-src = ["app"]
+src = ["src/atlas_vision"]
 
 [tool.ruff.lint]
-select = [
-    "E", # pycodestyle errors
-    "W", # pycodestyle warnings
-    "F", # pyflakes
-    "I", # isort
-    "C", # flake8-comprehensions
-    "B", # flake8-bugbear
-    "UP", # pyupgrade
-]
-ignore = [
-    "E501", # line too long, handled by black
-]
+select = ["E", "W", "F", "I", "C", "B", "UP"]
+ignore = ["E501"]
 
 [tool.pytest.ini_options]
-pythonpath = ["app"]
+pythonpath = ["src"]
 testpaths = ["tests"]
 filterwarnings = [
     "ignore:.*BeartypeCallHintPepParamException.*:DeprecationWarning",
@@ -87,5 +83,5 @@ filterwarnings = [
 ]
 
 [tool.coverage.report]
-include = ["app/*", "tests/*"]
+include = ["src/*", "tests/*"]
 omit = []

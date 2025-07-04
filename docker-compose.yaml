@@ -22,7 +22,7 @@ services:
     ports:
       - "127.0.0.1:8008:8008"
     env_file:
-      - ./app/config/.env
+      - src/atlas_vision/config/.env
     volumes:
       - ./app:/usr/local/src/app
     networks:
@@ -43,7 +43,7 @@ services:
       - "--concurrency=2"
       - "--queues=chat,celery"
     env_file:
-      - ./app/config/.env
+      - src/atlas_vision/config/.env
     volumes:
       - ./app:/usr/local/src/app
     networks:
@@ -62,7 +62,7 @@ services:
       - "--concurrency=2"
       - "--queues=compute,celery"
     env_file:
-      - ./app/config/.env
+      - src/atlas_vision/config/.env
     volumes:
       - ./app:/usr/local/src/app
       - huggingface-cache:/usr/local/src/.cache/huggingface

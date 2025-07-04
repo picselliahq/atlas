@@ -135,7 +135,7 @@ docs/_build/
 **/*.sage.py
 
 # Environments
-app/config/.env
+src/atlas_vision/config/.env
 **/.venv
 **/env/
 **/venv/
@@ -250,7 +250,7 @@ build/Release
 **/.yarn-integrity
 
 # dotenv environment variable files
-app/config/.env
+src/atlas_vision/config/.env
 **/.env.development.local
 **/.env.test.local
 **/.env.production.local
